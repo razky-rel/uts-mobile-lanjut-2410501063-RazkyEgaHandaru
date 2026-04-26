@@ -1,11 +1,18 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const HomeScreen = ({ navigation }) => {
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchMeals();
+    setRefreshing(false);
+  };
 
   const fetchMeals = async () => {
     try {
@@ -58,6 +65,9 @@ const HomeScreen = ({ navigation }) => {
               <Text style={styles.title}>{item.strMeal}</Text>
             </TouchableOpacity>
         )} 
+        refreshControl={
+          <RefreshControl  refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </View>
     );
