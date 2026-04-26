@@ -17,7 +17,7 @@ function HomeStack() {
       <Stack.Screen
         name="Utama"
         component={HomeScreen}
-        options={{ title: "ResepKita" }}
+        options={{ title: "Beranda" }}
       />
       <Stack.Screen name="Detail" component={DetailScreen} />
     </Stack.Navigator>
