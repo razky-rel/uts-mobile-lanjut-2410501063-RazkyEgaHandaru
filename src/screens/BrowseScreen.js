@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const HomeScreen = ({ navigation }) => {
+const BrowseScreen = ({ navigation }) => {
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
   button: {marginTop: 10, backgroundColor: '#f4511e', padding: 10, borderRadius: 5}
 });
 
-export default HomeScreen;
+export default BrowseScreen;

@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import AboutScreen from "./src/screens/AboutScreen";
+import BrowseScreen from "./src/screens/BrowseScreen";
 import DetailScreen from "./src/screens/DetailScreen";
 import FavoritesScreen from "./src/screens/FavoritesScreen";
 import HomeScreen from "./src/screens/HomeScreen";
@@ -14,11 +15,8 @@ const Stack = createStackNavigator();
 function HomeStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Utama"
-        component={HomeScreen}
-        options={{ title: "Beranda" }}
-      />
+      <Stack.Screen name="Utama" component={HomeScreen} options={{ title: "Beranda" }}/>
+      <Stack.Screen name="Browse" component={BrowseScreen} options={{ title: "Daftar Resep" }}/> 
       <Stack.Screen name="Detail" component={DetailScreen} />
     </Stack.Navigator>
   );
