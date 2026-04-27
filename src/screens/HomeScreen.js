@@ -3,22 +3,22 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const HomeScreen = ({ navigation }) => {
-  const [meals, setMeals] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
-    await fetchMeals();
+    await fetchCategories();
     setRefreshing(false);
   };
 
-  const fetchMeals = async () => {
+  const fetchCategories = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood');
-      setMeals(response.data.meals);
+      const response = await axios.get('https://www.themealdb.com/api/json/v1/1/categories.php');
+      setCategories(response.data.categories);
       setError(null);
     } catch (err) {
       setError('Gagal memuat data. Cek koneksi internet anda');
@@ -28,47 +28,34 @@ const HomeScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    fetchMeals();
+    fetchCategories();
   }, []);
 
   if (loading) {
     return (
       <View style={styles.center}>
         <ActivityIndicator size="large" color="#f4511e" />
-        <Text>Sedang masak resep...</Text>
       </View>
     );
   }
-
-  if (error) {
-    return (
-      <View style={styles.center}>
-        <Text>{error}</Text>
-        <TouchableOpacity style={styles.button} onPress={fetchMeals}>
-          <Text style={{ color: '#f5f5f5'}}>Coba Lagi</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>Pilih Kategori</Text>
       <FlatList 
-        data={meals}
-        keyExtractor={(item) => item.idMeal}
+        data={categories}
+        keyExtractor={(item) => item.idCategory}
+        numColumns={2}
+        refreshControl={<RefreshControl  refreshing={refreshing} onRefresh={onRefresh} />}
         renderItem={({ item }) => (
           <TouchableOpacity 
-            style={styles.card}
-            onPress={() => navigation.navigate('Detail', { mealId: item.idMeal})} 
+            style={styles.categoryCard}
+            onPress={() => navigation.navigate('Browse', { categoryName: item.strCategory})} 
             >
-              <Image source={{ uri: item.strMealThumb }} style={styles.image} />
-              <Text style={styles.title}>{item.strMeal}</Text>
+              <Image source={{ uri: item.strCategoryThumb }} style={styles.catImage} />
+              <Text style={styles.catTitle}>{item.strCategory}</Text>
             </TouchableOpacity>
-        )} 
-        refreshControl={
-          <RefreshControl  refreshing={refreshing} onRefresh={onRefresh} />
-        }
+        )}  
       />
     </View>
     );
@@ -78,10 +65,11 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f5f5f5', padding:10  },
   center: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-  card: {backgroundColor: '#ffffff', marginBottom: 15, borderRadius: 10, overflow: 'hidden', elevation: 3},
-  image: {width: '100%', height: 200},
-  title: { padding: 10, fontSize: 16, fontWeight: 'bold'},
-  button: {marginTop: 10, backgroundColor: '#f4511e', padding: 10, borderRadius: 5}
+  header: {fontSize: 20, fontWeight: 'bold', marginBottom: 10, marginLeft:5},
+  categoryCard: {flex: 1, margin:5, backgroundColor: '#f9f9f9', borderRadius:10, 
+    alignItems: 'center', padding:10, elevation: 2},
+  catImage: {width: 100, height: 100, resizeMode: 'contain'},
+  catTitle: { marginTop:5, fontWeight: 'bold'},
 });
 
 export default HomeScreen;

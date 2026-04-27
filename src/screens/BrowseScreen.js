@@ -2,7 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const BrowseScreen = ({ navigation }) => {
+const BrowseScreen = ({ route, navigation }) => {
+  const {categoryName} = route.params || {categoryName: 'Seafood'};
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +18,7 @@ const BrowseScreen = ({ navigation }) => {
   const fetchMeals = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood');
+      const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`);
       setMeals(response.data.meals);
       setError(null);
     } catch (err) {
@@ -28,8 +29,9 @@ const BrowseScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
+    navigation.setOptions({title: `Resep ${categoryName}`});
     fetchMeals();
-  }, []);
+  }, [categoryName]);
 
   if (loading) {
     return (
