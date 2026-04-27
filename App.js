@@ -22,6 +22,15 @@ function HomeStack() {
   );
 }
 
+function SearchStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Cari" component={SearchScreen} />
+      <Stack.Screen name="Detail" component={DetailScreen} />
+    </Stack.Navigator>
+  );
+}
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -31,7 +40,7 @@ export default function App() {
           component={HomeStack}
           options={{ headerShown: false }}
         />
-        <Tab.Screen name="Cari" component={SearchScreen} />
+        <Tab.Screen name="Cari" component={SearchStack} options={{ headerShown: false }} />
         <Tab.Screen name="Favorit" component={FavoritesScreen} />
         <Tab.Screen name="Tentang" component={AboutScreen} />
       </Tab.Navigator>
