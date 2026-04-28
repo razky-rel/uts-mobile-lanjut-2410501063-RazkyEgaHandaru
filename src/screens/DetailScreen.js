@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useFavorites } from '../context/FavoritesContext';
 
 const DetailScreen = ({route}) => {
   const { mealId } = route.params;
@@ -14,6 +15,8 @@ const DetailScreen = ({route}) => {
     await fetchDetail();
     setRefreshing(false);
   };
+
+  const {toggleFavorite, isFavorite} = useFavorites();
 
 
   const fetchDetail = async () => {
@@ -64,9 +67,19 @@ const DetailScreen = ({route}) => {
      refreshControl={<RefreshControl  refreshing={refreshing} onRefresh={onRefresh} />}>
       <Image source={{uri: meal.strMealThumb}} style={styles.image}/>
       <View style={styles.content}>
-        <Text style= {styles.title}>{meal.strMeal}</Text>
-        <Text style= {styles.category}>{meal.strCategory} | {meal.strArea}</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}} >
+          <View style={{flex: 1}}>
+            <Text style= {styles.title}>{meal.strMeal}</Text>
+            <Text style= {styles.category}>{meal.strCategory} | {meal.strArea}</Text>
+          </View>
+            <TouchableOpacity onPress={() => toggleFavorite(meal)}>
+              <Text style={{ fontSize: 30, color: isFavorite(meal.idMeal) ? 'red' : '#ccc' }} >
+                {isFavorite(meal.idMeal) ? '❤️' : '🤍'}
+              </Text>
+            </TouchableOpacity>
+        </View>
 
+        
         <View style={styles.section}>
           <Text style= {styles.sectionTitle} >Bahan-bahan:</Text>
           {ingredients.map((item, index) => (

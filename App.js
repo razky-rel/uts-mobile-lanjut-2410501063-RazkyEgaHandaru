@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { FavoritesProvider } from "./src/context/FavoritesContext";
 
 import AboutScreen from "./src/screens/AboutScreen";
 import BrowseScreen from "./src/screens/BrowseScreen";
@@ -31,19 +32,32 @@ function SearchStack() {
   );
 }
 
+function FavoritesStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Favorit" component={FavoritesScreen} options={{ title: 'Resep Favorit' }}/>
+      <Stack.Screen name="Detail" component={DetailScreen}/>
+
+    </Stack.Navigator>
+  )
+}
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Beranda"
-          component={HomeStack}
-          options={{ headerShown: false }}
-        />
-        <Tab.Screen name="Cari" component={SearchStack} options={{ headerShown: false }} />
-        <Tab.Screen name="Favorit" component={FavoritesScreen} />
-        <Tab.Screen name="Tentang" component={AboutScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <FavoritesProvider>
+      <NavigationContainer>
+            <Tab.Navigator>
+              <Tab.Screen
+                name="Beranda"
+                component={HomeStack}
+                options={{ headerShown: false }}
+              />
+              <Tab.Screen name="Cari" component={SearchStack} options={{ headerShown: false }} />
+              <Tab.Screen name="Favorit" component={FavoritesStack} options={{ headerShown: false }} />
+              <Tab.Screen name="Tentang" component={AboutScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>     
+    </FavoritesProvider>
+   
   );
 }
