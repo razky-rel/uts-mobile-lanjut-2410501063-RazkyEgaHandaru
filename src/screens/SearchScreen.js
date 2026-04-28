@@ -7,10 +7,19 @@ const SearchScreen = ({navigation}) => {
   const [results, setResults] = useState([])  ;
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
+  const [error, setError] = useState('');
 
   const searchRecipe = async () => {
-    if (!query) return;
-
+    if (query.trim().length === 0) {
+      setError('Input tidak boleh kosong');
+      return;
+    }
+    if (query.trim().length < 3){
+      setError('Minimal harus 3 karakter');
+      return;
+    }
+    setError('');
+    
     try {
       setLoading(true);
       setSearched(true);
@@ -28,12 +37,13 @@ const SearchScreen = ({navigation}) => {
       <View style={styles.searchBox}>
         <TextInput style={styles.input} placeholder="Cari resep... (contoh: Chicken)"
         value={query}
-        onChangeText={(text) => { setQuery(text); setSearched(false);}}
+        onChangeText={(text) => { setQuery(text); setSearched(false); if (error) setError('');}}
         onSubmitEditing={searchRecipe} />
           <TouchableOpacity style={styles.searchButton} onPress={searchRecipe}>
             <Text style={{color: '#fff', fontWeight: 'bold'}}>Cari</Text>
           </TouchableOpacity>
       </View>
+      {error ? <Text style={{color: 'red', marginLeft: 5, marginBottom: 10 }}>{error}</Text> : null }
 
       {loading ? (
         <ActivityIndicator size="large" color='#f4511e' style={{marginTop: 20}} />
