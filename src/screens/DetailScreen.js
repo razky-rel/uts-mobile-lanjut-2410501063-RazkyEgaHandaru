@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -74,7 +75,8 @@ const DetailScreen = ({route}) => {
           </View>
             <TouchableOpacity onPress={() => toggleFavorite(meal)}>
               <Text style={{ fontSize: 30, color: isFavorite(meal.idMeal) ? 'red' : '#ccc' }} >
-                {isFavorite(meal.idMeal) ? '❤️' : '🤍'}
+                <Ionicons name={isFavorite(meal.idMeal) ? 'heart' : 'heart-outline'}
+                size={32} color={isFavorite(meal.idMeal) ? 'red' : '#ccc'} />
               </Text>
             </TouchableOpacity>
         </View>

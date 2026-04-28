@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -15,7 +16,12 @@ const Stack = createStackNavigator();
 
 function HomeStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+        screenOptions={{
+        headerStyle: { backgroundColor: '#f4511e' }, 
+        headerTintColor: '#fff',
+        headerTitleStyle: { fontWeight: 'bold' },
+      }}>
       <Stack.Screen name="Utama" component={HomeScreen} options={{ title: "Beranda" }}/>
       <Stack.Screen name="Browse" component={BrowseScreen} options={{ title: "Daftar Resep" }}/> 
       <Stack.Screen name="Detail" component={DetailScreen} />
@@ -25,7 +31,12 @@ function HomeStack() {
 
 function SearchStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: '#f4511e' }, 
+        headerTintColor: '#fff',
+        headerTitleStyle: { fontWeight: 'bold' },
+      }}>
       <Stack.Screen name="Cari" component={SearchScreen} />
       <Stack.Screen name="Detail" component={DetailScreen} />
     </Stack.Navigator>
@@ -34,7 +45,12 @@ function SearchStack() {
 
 function FavoritesStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: '#f4511e' }, 
+        headerTintColor: '#fff',
+        headerTitleStyle: { fontWeight: 'bold' },
+      }}>
       <Stack.Screen name="Favorit" component={FavoritesScreen} options={{ title: 'Resep Favorit' }}/>
       <Stack.Screen name="Detail" component={DetailScreen}/>
 
@@ -46,7 +62,27 @@ export default function App() {
   return (
     <FavoritesProvider>
       <NavigationContainer>
-            <Tab.Navigator>
+            <Tab.Navigator
+              screenOptions={({route}) => ({
+                tabBarIcon: ({ focused, color, size}) => {
+                  let iconName;
+
+                  if (route.name === 'Beranda') {
+                    iconName = focused ? 'home' : 'home-outline';
+                  } else if (route.name === 'Cari') {
+                    iconName = focused ? 'search' : 'search-outline';
+                  } else if (route.name === 'Favorit') {
+                    iconName = focused ? 'heart' : 'heart-outline';
+                  } else if (route.name === 'Tentang') {
+                    iconName = focused ? 'person' : 'person-outline';
+                  } 
+
+                  return <Ionicons name={iconName} size={size} color={color} />;
+                },
+                tabBarActiveTintColor: '#f4511e',
+                tabBarInactiveTintColor: 'gray',
+              })} 
+              >
               <Tab.Screen
                 name="Beranda"
                 component={HomeStack}
@@ -54,7 +90,9 @@ export default function App() {
               />
               <Tab.Screen name="Cari" component={SearchStack} options={{ headerShown: false }} />
               <Tab.Screen name="Favorit" component={FavoritesStack} options={{ headerShown: false }} />
-              <Tab.Screen name="Tentang" component={AboutScreen} />
+              <Tab.Screen name="Tentang" component={AboutScreen} 
+              options={{headerStyle: { backgroundColor: '#f4511e' }, 
+                  headerTintColor: '#fff', headerTitleStyle: { fontWeight: 'bold' }}} />
             </Tab.Navigator>
           </NavigationContainer>     
     </FavoritesProvider>
