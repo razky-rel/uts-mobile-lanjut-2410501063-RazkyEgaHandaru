@@ -63,41 +63,37 @@ Scan QR Code menggunakan aplikasi Expo Go di Android/iOS.
 
 1. **Home Screen**
 
-    <img src="assets/screenshots/homescreen.jpg" />
+   <img src="src/assets/screenshots/homescreen.jpg" />
 
 2. **Browse Screen**
 
-    <img src="assets/screenshots/browsescreen.jpg" />
+   <img src="src/assets/screenshots/browsescreen.jpg" />
 
 3. **Detail Screen**
 
-    <img src="assets/screenshots/detailscreen.jpg" />
+   <img src="src/assets/screenshots/detailscreen.jpg" />
 
 4. **Search Screen**
 
-    <img src="assets/screenshots/searchscreen1.jpg" />
+   <img src="src/assets/screenshots/searchscreen1.jpg" />
 
-    <img src="assets/screenshots/searchscreen2.jpg" />
+   <img src="src/assets/screenshots/searchscreen2.jpg" />
 
 5. **Favorites Screen**
 
-    <img src="assets/screenshots/favoritesscreen.jpg" />
+   <img src="src/assets/screenshots/favoritesscreen.jpg" />
 
 6. **About Screen**
 
-    <img src="assets/screenshots/aboutscreen.jpg" />
+   <img src="src/assets/screenshots/aboutscreen.jpg" />
 
 ---
 
 ## 🎬 Video Demo
 
-   **Youtube**
-    
-    https://youtu.be/3vRNwZwS2e4
+- **YouTube**: [https://youtu.be/3vRNwZwS2e4](https://youtu.be/3vRNwZwS2e4)
 
-   **Drive**
-
-   https://drive.google.com/drive/folders/1TX67I_bGgXfOeC2VanAV4TbGMqPaLQgQ
+- **Google Drive**: [Link Folder Video](https://drive.google.com/drive/folders/1TX67I_bGgXfOeC2VanAV4TbGMqPaLQgQ)
 
 ---
 
