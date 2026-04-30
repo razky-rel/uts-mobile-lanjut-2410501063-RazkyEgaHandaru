@@ -63,29 +63,29 @@ Scan QR Code menggunakan aplikasi Expo Go di Android/iOS.
 
 1. **Home Screen**
 
-   <img src="src/assets/screenshots/homescreen.jpg" />
+   <img src="src/assets/screenshots/homescreen.jpg" width="200" />
 
 2. **Browse Screen**
 
-   <img src="src/assets/screenshots/browsescreen.jpg" />
+   <img src="src/assets/screenshots/browsescreen.jpg" width="200" />
 
 3. **Detail Screen**
 
-   <img src="src/assets/screenshots/detailscreen.jpg" />
+   <img src="src/assets/screenshots/detailscreen.jpg" width="200" />
 
 4. **Search Screen**
 
-   <img src="src/assets/screenshots/searchscreen1.jpg" />
+   <img src="src/assets/screenshots/searchscreen1.jpg" width="200" />
 
-   <img src="src/assets/screenshots/searchscreen2.jpg" />
+   <img src="src/assets/screenshots/searchscreen2.jpg" width="200" />
 
 5. **Favorites Screen**
 
-   <img src="src/assets/screenshots/favoritesscreen.jpg" />
+   <img src="src/assets/screenshots/favoritesscreen.jpg" width="200" />
 
 6. **About Screen**
 
-   <img src="src/assets/screenshots/aboutscreen.jpg" />
+   <img src="src/assets/screenshots/aboutscreen.jpg" width="200" />
 
 ---
 
