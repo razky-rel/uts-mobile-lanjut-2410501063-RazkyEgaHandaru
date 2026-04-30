@@ -12,10 +12,14 @@ const SearchScreen = ({navigation}) => {
   const searchRecipe = async () => {
     if (query.trim().length === 0) {
       setError('Input tidak boleh kosong');
+      setResults([]);
+      setSearched(false);
       return;
     }
     if (query.trim().length < 3){
       setError('Minimal harus 3 karakter');
+      setResults([]);
+      setSearched(false);
       return;
     }
     setError('');
